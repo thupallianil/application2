@@ -3,13 +3,9 @@ Django settings for invoice project.
 """
 
 import os
-import sys
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Add backend folder to Python path
-sys.path.insert(0, os.path.join(BASE_DIR.parent, "backend"))
 
 # ==========================================================
 # SECURITY
@@ -20,18 +16,20 @@ SECRET_KEY = os.environ.get(
     "django-insecure-y5cml_5mv^8@g=p3f@m01ql#9hp_o^=1@&(x+hx10^ju@kf$y6",
 )
 
-DEBUG = os.environ.get("DEBUG", "True") == "True"
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = os.environ.get(
-    "ALLOWED_HOSTS",
-    "127.0.0.1,localhost,application2-jziy.onrender.com",
-).split(",")
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "appliccation2.onrender.com",
+]
 
 # ==========================================================
 # INSTALLED APPS
 # ==========================================================
 
 INSTALLED_APPS = [
+    # Django Apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -39,16 +37,20 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    # Third-party Apps
     "rest_framework",
     "corsheaders",
     "drf_yasg",
 
-    "accounts",
-    "clients",
-    "invoices",
-    "payments",
-    "quotations",
-    "settings_app",
+    # Local Apps
+    "backend.accounts",
+    "backend.clients",
+    "backend.invoices",
+    "backend.payments",
+    "backend.profile_app",
+    "backend.quotations",
+    "backend.reports",
+    "backend.settings_app",
 ]
 
 # ==========================================================
@@ -58,7 +60,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-
     "corsheaders.middleware.CorsMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -139,7 +140,6 @@ USE_TZ = True
 # ==========================================================
 
 STATIC_URL = "/static/"
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
@@ -158,3 +158,22 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+# ==========================================================
+# DJANGO REST FRAMEWORK
+# ==========================================================
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+}
+
+# ==========================================================
+# SWAGGER SETTINGS
+# ==========================================================
+
+SWAGGER_SETTINGS = {
+    "USE_SESSION_AUTH": False,
+}
