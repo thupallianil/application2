@@ -8,7 +8,7 @@ from .views import EmailsSettingAPIView
 from .views import PdfSettingAPIView
 from .views import ExtrasSettingAPIView
 from .views import LicensesSettingAPIView
-from .views import GeneralSettingAPIView
+from .views import GeneralSettingAPIView, SystemInfoAPIView
 
 urlpatterns = [
     path('general/', GeneralSettingAPIView.as_view(), name='general-settings'),
@@ -21,4 +21,5 @@ urlpatterns = [
     path('pdf/', PdfSettingAPIView.as_view(), name='pdf-settings'),
     path('extras/', ExtrasSettingAPIView.as_view(), name='extras-settings'),
     path('licenses/', LicensesSettingAPIView.as_view(), name='licenses-settings'),
+    path('system/', SystemInfoAPIView.as_view(), name='system-info'),
 ]
