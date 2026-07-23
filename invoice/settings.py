@@ -5,7 +5,12 @@ Django settings for invoice project.
 import os
 from pathlib import Path
 
+import sys
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Add the adjacent 'backend' directory to Python path so we can discover the apps there
+sys.path.insert(0, os.path.join(BASE_DIR.parent, 'backend'))
 
 # SECURITY
 SECRET_KEY = os.environ.get(
@@ -27,7 +32,9 @@ ALLOWED_HOSTS = os.environ.get(
 
 INSTALLED_APPS = [
     # Third-party apps
+    "rest_framework",
     "corsheaders",
+    "drf_yasg",
 
     # Django apps
     "django.contrib.admin",
@@ -36,6 +43,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
+    # Internal apps
+    "accounts",
+    "clients",
+    "invoices",
+    "payments",
+    "quotations",
+    "settings_app",
 ]
 
 MIDDLEWARE = [
