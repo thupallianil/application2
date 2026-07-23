@@ -21,7 +21,6 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
-    "appliccation2.onrender.com",
     "application2-8hmr.onrender.com",
     "*",
 ]
