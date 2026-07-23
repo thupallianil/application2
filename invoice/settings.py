@@ -3,16 +3,18 @@ Django settings for invoice project.
 """
 
 import os
-from pathlib import Path
-
 import sys
+from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Add the adjacent 'backend' directory to Python path so we can discover the apps there
-sys.path.insert(0, os.path.join(BASE_DIR.parent, 'backend'))
+# Add backend folder to Python path
+sys.path.insert(0, os.path.join(BASE_DIR.parent, "backend"))
 
+# ==========================================================
 # SECURITY
+# ==========================================================
+
 SECRET_KEY = os.environ.get(
     "SECRET_KEY",
     "django-insecure-y5cml_5mv^8@g=p3f@m01ql#9hp_o^=1@&(x+hx10^ju@kf$y6",
@@ -25,26 +27,22 @@ ALLOWED_HOSTS = os.environ.get(
     "127.0.0.1,localhost,application2-jziy.onrender.com",
 ).split(",")
 
-
-# ==========================
-# Application definition
-# ==========================
+# ==========================================================
+# INSTALLED APPS
+# ==========================================================
 
 INSTALLED_APPS = [
-    # Third-party apps
-    "rest_framework",
-    "corsheaders",
-    "drf_yasg",
-
-    # Django apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
-    # Internal apps
+
+    "rest_framework",
+    "corsheaders",
+    "drf_yasg",
+
     "accounts",
     "clients",
     "invoices",
@@ -53,10 +51,14 @@ INSTALLED_APPS = [
     "settings_app",
 ]
 
+# ==========================================================
+# MIDDLEWARE
+# ==========================================================
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 
-    # CORS Middleware
     "corsheaders.middleware.CorsMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -68,6 +70,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "invoice.urls"
+
+# ==========================================================
+# TEMPLATES
+# ==========================================================
 
 TEMPLATES = [
     {
@@ -86,10 +92,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "invoice.wsgi.application"
 
-
-# ==========================
-# Database
-# ==========================
+# ==========================================================
+# DATABASE
+# ==========================================================
 
 DATABASES = {
     "default": {
@@ -98,10 +103,9 @@ DATABASES = {
     }
 }
 
-
-# ==========================
-# Password Validation
-# ==========================
+# ==========================================================
+# PASSWORD VALIDATION
+# ==========================================================
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -118,10 +122,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# ==========================
-# Internationalization
-# ==========================
+# ==========================================================
+# INTERNATIONALIZATION
+# ==========================================================
 
 LANGUAGE_CODE = "en-us"
 
@@ -131,26 +134,27 @@ USE_I18N = True
 
 USE_TZ = True
 
+# ==========================================================
+# STATIC FILES
+# ==========================================================
 
-# ==========================
-# Static Files
-# ==========================
-
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
-# ==========================
-# CORS Settings
-# ==========================
+# ==========================================================
+# CORS
+# ==========================================================
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5176",
     "http://127.0.0.1:5176",
-    "https://application2-jziy.onrender.com",
+    "https://application-46lj-five.vercel.app",
+    "https://application-46lj-3buny0vo2-thupallianils-projects.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
