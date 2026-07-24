@@ -34,6 +34,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
     path("api/settings/", include("backend.settings_app.urls")),
+    path("api/auth/", include("backend.accounts.urls")),
     path(
         "swagger/",
         schema_view.with_ui("swagger", cache_timeout=0),
