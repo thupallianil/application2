@@ -184,9 +184,26 @@ class GeneralSettingAPIView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class TranslateSettingAPIView(APIView):
+    def get_object(self):
+        obj, created = TranslateSetting.objects.get_or_create(id=1)
+        return obj
+
+    def get(self, request, *args, **kwargs):
+        settings = self.get_object()
+        serializer = TranslateSettingSerializer(settings)
+        return Response(serializer.data)
+
+    def put(self, request, *args, **kwargs):
+        settings = self.get_object()
+        serializer = TranslateSettingSerializer(settings, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 import platform
-from django.db import connection
 
 class SystemInfoAPIView(APIView):
     def get(self, request, *args, **kwargs):

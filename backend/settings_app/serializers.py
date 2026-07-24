@@ -1,52 +1,57 @@
 from rest_framework import serializers
 from .models import *
 
+class GeneralSettingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GeneralSetting
+        fields = '__all__'
+
 class BusinessSettingSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusinessSetting
-        fields = ['logoUrl', 'businessName', 'address', 'extraInfo', 'website']
+        fields = '__all__'
 
 class QuotesSettingSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuotesSetting
-        fields = ['prefix', 'nextNumber', 'validity', 'terms', 'notes']
+        fields = '__all__'
 
 class InvoicesSettingSerializer(serializers.ModelSerializer):
     class Meta:
         model = InvoicesSetting
-        fields = ['prefix', 'nextNumber', 'dueDays', 'footer', 'notes']
+        fields = '__all__'
 
 class PaymentsSettingSerializer(serializers.ModelSerializer):
     class Meta:
         model = PaymentsSetting
-        fields = ['bankName', 'accountName', 'accountNumber', 'ifsc', 'upi']
+        fields = '__all__'
 
 class TaxSettingSerializer(serializers.ModelSerializer):
     class Meta:
         model = TaxSetting
-        fields = ['taxName', 'taxRate', 'taxNumber']
+        fields = '__all__'
 
 class EmailsSettingSerializer(serializers.ModelSerializer):
     class Meta:
         model = EmailsSetting
-        fields = ['mailFrom', 'smtpHost', 'smtpPort', 'username', 'password']
+        fields = '__all__'
 
 class PdfSettingSerializer(serializers.ModelSerializer):
     class Meta:
         model = PdfSetting
-        fields = ['template', 'paper', 'orientation', 'watermark']
+        fields = '__all__'
+
+class TranslateSettingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TranslateSetting
+        fields = '__all__'
 
 class ExtrasSettingSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExtrasSetting
-        fields = ['darkMode', 'notifications', 'maintenance']
+        fields = '__all__'
 
 class LicensesSettingSerializer(serializers.ModelSerializer):
     class Meta:
         model = LicensesSetting
-        fields = ['company', 'purchaseCode', 'licenseKey', 'expiry']
-
-class GeneralSettingSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = GeneralSetting
-        fields = ['yearStart', 'yearEnd', 'preDefinedLineItems']
+        fields = '__all__'
