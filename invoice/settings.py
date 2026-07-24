@@ -157,6 +157,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5176",
     "https://application-46lj-five.vercel.app",
     "https://application-46lj-3buny0vo2-thupallianils-projects.vercel.app",
+    "https://application-two-plum.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
